@@ -12,7 +12,7 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
 
         // restart for autodeployment
         if ($httpPath === '/restart') {
-            exit 1;
+            exit;
         }
 
         $filePath = "../../frontend/" . $httpPath;
