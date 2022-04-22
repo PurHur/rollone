@@ -6,7 +6,11 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
 
         $httpPath = $request->getUri()->getPath();
         printf("%s\n", $httpPath);
-        if ($httpPath === '/') {
+        if($httpPath === '/') {
+            $httpPath = '/index.html';
+        }
+
+        if ($httpPath === '/roll') {
             $httpPath = '/index.php';
         }
 
