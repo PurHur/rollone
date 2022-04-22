@@ -103,9 +103,6 @@ const initActions = () => {
 
 const setDiceValue = (value) => {
     DiceManager.prepareValues([{dice: dice, value: value}]);
-
-    const diceValue = document.getElementById('dice');
-    diceValue.innerText = value;
 };
 
 const initEventSource = () => {
