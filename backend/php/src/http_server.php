@@ -19,6 +19,9 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
     if ($extension === 'html') {
         $mime = "text/html";
+    } else if ($extension === 'php') {
+        $content = include $filePath;
+        $mime = "text/html";
     } else {
         $mime = mime_content_type($filePath);
     }
