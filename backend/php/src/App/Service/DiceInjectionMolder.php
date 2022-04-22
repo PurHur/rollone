@@ -1,7 +1,7 @@
 <?php
-namespace Rollguys\Rollone\App;
+namespace Rollguys\Rollone\App\Service;
 
-use Rollguys\Rollone\App\Dice;
+use Rollguys\Rollone\App\Model\Dice;
 
 class DiceInjectionMolder {
     public function spritzgussDices(int $diceCount, int $diceSides) {

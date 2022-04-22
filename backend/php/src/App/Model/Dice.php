@@ -1,6 +1,6 @@
 <?php
 
-namespace Rollguys\Rollone\App;
+namespace Rollguys\Rollone\App\Model;
 
 class Dice {
 
