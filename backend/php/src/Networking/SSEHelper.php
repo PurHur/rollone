@@ -50,11 +50,11 @@ class SSEHelper
             '<h1>500</h1><p>xInternal Server Error</p>'
         );
     }
-    
+
     /**
      * @param \React\Stream\ThroughStream $broadcastStream
      * @param ServerRequest $request
-     * @return \React\Http\Response
+     * @return \React\Http\Message\Response
      */
     public function getStreamingResponse($broadcastStream,$request)
     {
@@ -89,7 +89,13 @@ class SSEHelper
     public function getPrivateStreamByPHPSESSID($phpsessid) {
         return isset($this->privateConnections[$phpsessid])?$this->privateConnections[$phpsessid]:null;
     }
-    
+
+    /**
+     * @param $event
+     * @param $data
+     *
+     * @return string
+     */
     public static function generateSSEEvent($event, $data) {
         return 'event: ' . $event . "\n" . 'data: ' . $data . "\n\n";
     }
