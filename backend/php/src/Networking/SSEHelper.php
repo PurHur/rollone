@@ -58,19 +58,7 @@ class SSEHelper
     public function generateSSEFormatedStream()
     {
         return new \React\Stream\ThroughStream(function ($data) {
-            if (is_string($data)) {
-                return 'data: ' . $data . "\n\n";
-            } else if (is_array($data)) {
-                $str = '';
-
-                foreach($data as $key => $value) {
-                    $str .= "$key: $value\n";
-                }
-
-                return $str . "\n\n";
-            }
-
-            return null;
+            return $data;
         });
     }
 
