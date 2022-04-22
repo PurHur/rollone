@@ -18,9 +18,7 @@ class Random
         $json = file_get_contents($url);
         $data = json_decode($json, true);
 
-        print_r($data);
-
-        return 0;
+        return current($data);
     }
 
 }
