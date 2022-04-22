@@ -74,11 +74,7 @@ const initDice = () => {
     dice.getObject().rotation.y = -120 * Math.PI / 180;
     dice.getObject().rotation.x = 45 * Math.PI / 180;
     dice.updateBodyFromMesh();
-
-    dice.getObject().on('click', _ => {
-        rollDice();
-    });
-
+    
     // Set the value of the side, which will be upside after the dice lands
     DiceManager.prepareValues([{dice: dice, value: 1}]);
 
