@@ -19,7 +19,7 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
             exit;
         }
 
-        $filePath = "../../../frontend/" . $httpPath;
+        $filePath = "../../frontend/" . $httpPath;
 
         if (!file_exists($filePath)) {
             return new React\Http\Message\Response(
