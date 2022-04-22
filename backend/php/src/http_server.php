@@ -29,8 +29,6 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
             $mime = mime_content_type($filePath);
         }
 
-        print_r($content);
-
         return new React\Http\Message\Response(
             React\Http\Message\Response::STATUS_OK,
             [
