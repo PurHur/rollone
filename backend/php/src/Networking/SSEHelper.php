@@ -31,7 +31,7 @@ class SSEHelper
      * @param \React\HttpClient\Request $request
      * @param \React\Stream\ThroughStream $broadcastStream
      *
-     * @return \React\Http\Response
+     * @return \React\Http\Message\Response
      */
     public function handleIncomingConnection($request, $broadcastStream)
     {
@@ -42,7 +42,7 @@ class SSEHelper
         }
 
 
-        return new \React\Http\Response(
+        return new \React\Http\Message\Response(
             500,
             array(
                 'Content-Type' => 'text/html'
