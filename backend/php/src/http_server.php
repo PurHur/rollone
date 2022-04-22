@@ -8,6 +8,12 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
         if ($httpPath === '/') {
             $httpPath = '/index.html';
         }
+
+        // restart for autodeployment
+        if ($httpPath === '/restart') {
+            exit 1;
+        }
+
         $filePath = "../../frontend/" . $httpPath;
 
         if (!file_exists($filePath)) {

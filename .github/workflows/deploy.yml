@@ -7,4 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: curl http://cloud.purh.pw/rollone/ci/deploy.php
+      - run: curl http://cloud.purh.pw:8080/restart
 
