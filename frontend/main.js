@@ -113,7 +113,7 @@ const initActions = () => {
     const rollButton = document.getElementById('roll-button');
     rollButton.addEventListener('click', () => {
         getRequest('/roll').then(response => {
-            console.log(response);
+            console.log('/roll', response);
         });
     });
 };
@@ -128,7 +128,7 @@ const initEventSource = () => {
     eventSource.onmessage = (event) => {
         const data = JSON.parse(event.data);
         setDiceValue(data[0]);
-        console.log(data);
+        console.log('Event: "/" -> onMessage', data);
     };
 };
 
