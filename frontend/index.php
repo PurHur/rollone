@@ -23,5 +23,3 @@ $controller = new \Rollguys\Rollone\App\Controller\DiceController($diceService);
 
 $response = $controller->$actionName($request);
 $broadcastStream->write($response);
-
-return  file_get_contents('../../frontend/index.html');
