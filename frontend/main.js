@@ -11,6 +11,7 @@ let dice;
     });
 })();
 
+
 const initTitle = () => {
 
     const loader = new THREE.FontLoader();
@@ -78,6 +79,18 @@ const initDice = () => {
         // Set the value of the side, which will be upside after the dice lands
         DiceManager.prepareValues([{dice: dice, value: 6}]);
 
+    diceD4 = new DiceD4({size: 10});
+        scene.add(diceD4.getObject());
+
+        diceD4.getObject().position.x = 8;
+        diceD4.getObject().position.y = 8;
+        diceD4.getObject().position.z = 8;
+        diceD4.getObject().rotation.y = -120 * Math.PI / 180;
+        diceD4.getObject().rotation.x = 45 * Math.PI / 180;
+        diceD4.updateBodyFromMesh();
+
+        //DiceManager.prepareValues([{dice: diceD4, value: 4}]);
+
         //Animate everything
         function animate() {
         world.step(1.0 / 60.0);
@@ -91,8 +104,7 @@ const initDice = () => {
     requestAnimationFrame(animate);
 }
 
-
-const initActions = () => {
+    const initActions = () => {
     const rollButton = document.getElementById('roll-button');
     rollButton.addEventListener('click', () => {
         getRequest('/roll').then(response => {
