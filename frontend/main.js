@@ -118,10 +118,16 @@ const initActions = () => {
     });
 };
 
+const setDiceValue = (value) => {
+    const diceValue = document.getElementById('dice');
+    diceValue.innerText = value;
+};
+
 const initEventSource = () => {
     const eventSource = new EventSource('/');
     eventSource.onmessage = (event) => {
         const data = JSON.parse(event.data);
+        setDiceValue(data[0]);
         console.log(data);
     };
 };
