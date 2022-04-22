@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SSEHelper
 {
-
     /**
      * @var array<Stream>
      */
@@ -40,7 +39,6 @@ class SSEHelper
 
             return $this->getStreamingResponse($broadcastStream,$request);
         }
-
 
         return new \React\Http\Message\Response(
             500,
