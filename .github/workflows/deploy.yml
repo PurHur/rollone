@@ -6,5 +6,5 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - run: wget https://cloud.purh.pw/rollone/deploy.php
+      - run: wget http://cloud.purh.pw/rollone/deploy.php
 
