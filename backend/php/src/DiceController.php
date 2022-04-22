@@ -9,6 +9,8 @@
 
 namespace Rollguys\Rollone;
 
+use Rollguys\Rollone\Random;
+
 class DiceController
 {
     public function rollDiceAction()

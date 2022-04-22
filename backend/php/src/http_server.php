@@ -6,7 +6,7 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
 
         $httpPath = $request->getUri()->getPath();
         if ($httpPath === '/') {
-            $httpPath = '/index.html';
+            $httpPath = '/index.php';
         }
         $filePath = "../../frontend/" . $httpPath;
 
