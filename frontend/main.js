@@ -111,7 +111,6 @@ const initDice = () => {
             rotationDirection = 'counterclockwise';
 
         }
->>>>>>> 586eb3b6190a36275a4c508f637fe937982ce8b1
 
         dice.updateBodyFromMesh();
         dice.updateMeshFromBody(); // Call this after updating the physics world for rearranging the mesh according to the body
@@ -131,7 +130,7 @@ const rollDice = () => {
     });
 };
 
-const initActions = () =>
+const initActions = () =>{
     const rollButton = document.getElementById('roll-button');
     rollButton.addEventListener('click', () => {
         rollDice();
