@@ -10,10 +10,10 @@ class DiceService {
     /**
      * @return array
      */
-    public function rollDices() {
+    public function rollDices($sides) {
         $diceTower = new DiceTower();
         $diceInjectionMolder = new DiceInjectionMolder();
-        $dices = $diceInjectionMolder->injectDices(1,6);
+        $dices = $diceInjectionMolder->injectDices(1,$sides);
 
         return $diceTower->use($dices);
     }
