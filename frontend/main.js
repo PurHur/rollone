@@ -20,7 +20,7 @@ const initTitle = () => {
 
         const text = new THREE.TextGeometry('ROLL ONE', {
             font: font,
-            size: 10,
+            size: window.matchMedia('(min-width: 768px)').matches ? 10 : 5,
             height: 1,
             curveSegments: 12,
             bevelEnabled: true,
