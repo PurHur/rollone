@@ -9,7 +9,6 @@
 
 namespace Rollguys\Rollone\App\Controller;
 
-use React\Http\Message\Response;
 use Rollguys\Rollone\App\Service\DiceService;
 use Rollguys\Rollone\Networking\SSEHelper;
 
@@ -20,11 +19,17 @@ class DiceController
      */
     private $diceService;
 
+    /**
+     * @param DiceService $diceService
+     */
     public function __construct(DiceService $diceService)
     {
         $this->diceService = $diceService;
     }
 
+    /**
+     * @return string
+     */
     public function rollDiceAction()
     {
         $result = $this->diceService->rollDices();
