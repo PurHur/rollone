@@ -5,7 +5,6 @@ body {
 }
 
 .dice{
-    border: 1px solid red;
     position: absolute;
     width: 180px;
     height: 180px;
