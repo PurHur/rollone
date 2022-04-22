@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SSEHelper
 {
-
     /**
      * @var array<Stream>
      */
@@ -41,7 +40,6 @@ class SSEHelper
             return $this->getStreamingResponse($broadcastStream,$request);
         }
 
-
         return new \React\Http\Message\Response(
             500,
             array(
@@ -52,25 +50,14 @@ class SSEHelper
     }
 
     /**
-     * @return \React\Stream\ThroughStream
-     * @todo refactor into new class SSEStream
-     */
-    public function generateSSEFormatedStream()
-    {
-        return new \React\Stream\ThroughStream(function ($data) {
-            return $data;
-        });
-    }
-
-    /**
      * @param \React\Stream\ThroughStream $broadcastStream
      * @param ServerRequest $request
-     * @return \React\Http\Response
+     * @return \React\Http\Message\Response
      */
     public function getStreamingResponse($broadcastStream,$request)
     {
         // create a stream and format it as sse data
-        $privateStream = $this->generateSseFormatedStream();
+        $privateStream = new \React\Stream\ThroughStream();
 
         $sessId = $request->getCookieParams()['PHPSESSID'];
         $this->privateConnections[$sessId] = $privateStream;
@@ -100,7 +87,13 @@ class SSEHelper
     public function getPrivateStreamByPHPSESSID($phpsessid) {
         return isset($this->privateConnections[$phpsessid])?$this->privateConnections[$phpsessid]:null;
     }
-    
+
+    /**
+     * @param $event
+     * @param $data
+     *
+     * @return string
+     */
     public static function generateSSEEvent($event, $data) {
         return 'event: ' . $event . "\n" . 'data: ' . $data . "\n\n";
     }

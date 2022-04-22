@@ -2,8 +2,8 @@
 
 namespace  Rollguys\Rollone\App\Model;
 
-class DiceTower {
-
+class DiceTower
+{
     /**
      * @var array $dices
      *
@@ -14,7 +14,7 @@ class DiceTower {
         $result = [];
 
         foreach ($dices as $key => $dice) {
-            $result[$key] = $dice->throw();
+            $result[$key] = $dice->roll();
         }
 
         return $result;

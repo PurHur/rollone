@@ -1,18 +1,13 @@
 <?php
-
-
-
 // http sse formatted broadcast stream
 $broadcastStream = new \React\Stream\ThroughStream(function ($data) {
     return $data;
 });
 
 $sseHelper = new \Rollguys\Rollone\Networking\SSEHelper();
-
 $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterface $request) use($sseHelper, $broadcastStream) {
 
     try {
-
         $httpPath = $request->getUri()->getPath();
 
         if ($sseHelper->isSSEConnectionRequest($request)) {
@@ -34,13 +29,11 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
         }
 
         $filePath = "../../frontend/" . $httpPath;
-
         if (!file_exists($filePath)) {
             return new React\Http\Message\Response(
                 React\Http\Message\Response::STATUS_NOT_FOUND
             );
         }
-
 
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
         if ($extension === 'html') {
@@ -77,6 +70,5 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
 $socket = new React\Socket\SocketServer('0.0.0.0:8080');
 
 echo "Listening on {$socket->getAddress()}\n";
-
 
 $http->listen($socket);
