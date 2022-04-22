@@ -29,6 +29,6 @@ class DiceController
     {
         $result = $this->diceService->rollDices();
 
-        return SSEHelper::generateSSEEvent("roll","{'rolls': ".json_encode($result)."}");
+        return SSEHelper::generateSSEEvent("roll","{rolls: ".json_encode($result)."}");
     }
 }
