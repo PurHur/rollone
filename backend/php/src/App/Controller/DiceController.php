@@ -9,6 +9,7 @@
 
 namespace Rollguys\Rollone\App\Controller;
 
+use React\Http\Message\Response;
 use Rollguys\Rollone\App\Service\DiceService;
 
 class DiceController
