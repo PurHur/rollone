@@ -68,15 +68,17 @@ const initDice = () => {
 
     dices.forEach(dice => {
         let diceObj;
+        let size = window.matchMedia('(min-width: 768px)').matches ? 10 : 5
+        let xPos = window.matchMedia('(min-width: 768px)').matches ? (-30 + (count%3) * 31) : (-10 + (count%3) * 10);
+        let yPos = window.matchMedia('(min-width: 768px)').matches ? (- Math.floor(count/3) * 30) : (8 - Math.floor(count/3) * 33);
         const diceManager = new DiceManagerClass();
         diceManager.setWorld(world);
+        eval( "diceObj = new DiceD" + dice +"({size: size});");
 
-        eval( "diceObj = new DiceD" + dice +"({size: 10});");
-        console.log(count);
         diceObj.diceManager = diceManager;
         // If you want to place the mesh somewhere else, you have to update the body
-        diceObj.getObject().position.x = -30 + (count%3) * 31;
-        diceObj.getObject().position.y = - Math.floor(count/3) * 30;
+        diceObj.getObject().position.x = xPos;
+        diceObj.getObject().position.y = yPos;
         diceObj.getObject().position.z = 0;
         diceObj.getObject().rotation.y = -120 * Math.PI / 180;
         diceObj.getObject().rotation.x = 45 * Math.PI / 180;

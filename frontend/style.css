@@ -5,6 +5,7 @@ body {
 }
 
 .dice{
+    border: 1px solid red;
     position: absolute;
     width: 180px;
     height: 180px;
@@ -38,6 +39,14 @@ body {
 #d20-button{
     top: 76%;
     left: 63%;
+}
+
+@media only screen and (max-width: 768px) {
+    .dice{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+    }
 }
 
 .action-row {
