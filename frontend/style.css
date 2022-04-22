@@ -4,10 +4,16 @@ body {
     background: #FFF6DC;
 }
 
+#d6-button{
+    position: absolute;
+    width: 180px;
+    height: 180px;
+}
+
 .dice {
     position: absolute;
-    top: 47%;
-    left: 48.5%;
+    top: 36%;
+    left: 43%;
     font-size: 60px;
     color: white;
     font-weight: bold;

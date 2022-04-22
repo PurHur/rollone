@@ -123,6 +123,11 @@ const initActions = () =>{
     rollButton.addEventListener('click', () => {
         rollDice();
     });
+
+    const d6 = document.getElementById('d6-button');
+    d6.addEventListener('click', () => {
+        rollDice();
+    });
 };
 
 const setDiceValue = (value) => {
