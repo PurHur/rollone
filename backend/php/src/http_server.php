@@ -5,6 +5,7 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
     try {
 
         $httpPath = $request->getUri()->getPath();
+        printf("%s\n", $httpPath);
         if ($httpPath === '/') {
             $httpPath = '/index.html';
         }
