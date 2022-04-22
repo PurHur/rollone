@@ -22,5 +22,5 @@ $diceService = new \Rollguys\Rollone\App\Service\DiceService();
 $controller = new \Rollguys\Rollone\App\Controller\DiceController($diceService);
 
 $response = $controller->$actionName($request);
-
+var_dump($response);
 return  file_get_contents('../../frontend/index.html');
