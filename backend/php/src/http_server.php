@@ -5,13 +5,14 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
     try {
 
         $httpPath = $request->getUri()->getPath();
+        printf("%s\n", $httpPath);
         if ($httpPath === '/') {
-            $httpPath = '/index.html';
+            $httpPath = '/index.php';
         }
 
         // restart for autodeployment
         if ($httpPath === '/restart') {
-            exit 1;
+            exit;
         }
 
         $filePath = "../../frontend/" . $httpPath;
