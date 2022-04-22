@@ -6,6 +6,8 @@ class DiceTower {
 
     /**
      * @var array $dices
+     *
+     * @return array
      */
     public function use($dices)
     {

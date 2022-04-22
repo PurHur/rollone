@@ -6,6 +6,10 @@ use Rollguys\Rollone\App\Model\DiceTower;
 use Rollguys\Rollone\App\Service\DiceInjectionMolder;
 
 class DiceService {
+
+    /**
+     * @return array
+     */
     public function rollDices() {
         $diceTower = new DiceTower();
         $diceInjectionMolder = new DiceInjectionMolder();
