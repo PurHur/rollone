@@ -50,18 +50,7 @@ class SSEHelper
             '<h1>500</h1><p>xInternal Server Error</p>'
         );
     }
-
-    /**
-     * @return \React\Stream\ThroughStream
-     * @todo refactor into new class SSEStream
-     */
-    public function generateSSEFormatedStream()
-    {
-        return new \React\Stream\ThroughStream(function ($data) {
-            return $data;
-        });
-    }
-
+    
     /**
      * @param \React\Stream\ThroughStream $broadcastStream
      * @param ServerRequest $request
@@ -70,7 +59,7 @@ class SSEHelper
     public function getStreamingResponse($broadcastStream,$request)
     {
         // create a stream and format it as sse data
-        $privateStream = $this->generateSseFormatedStream();
+        $privateStream = new \React\Stream\ThroughStream();
 
         $sessId = $request->getCookieParams()['PHPSESSID'];
         $this->privateConnections[$sessId] = $privateStream;
