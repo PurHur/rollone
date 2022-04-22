@@ -6,5 +6,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - run: wget https://cloud.purh.pw/rollone/deploy.php
+      - run: curl http://cloud.purh.pw/rollone/ci/deploy.php
+      - run: curl http://cloud.purh.pw:8080/restart
 

@@ -8,6 +8,12 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
         if ($httpPath === '/') {
             $httpPath = '/index.html';
         }
+
+        // restart for autodeployment
+        if ($httpPath === '/restart') {
+            exit 1;
+        }
+
         $filePath = "../../frontend/" . $httpPath;
 
         if (!file_exists($filePath)) {
@@ -46,7 +52,7 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
     }
 });
 
-$socket = new React\Socket\SocketServer('127.0.0.1:8080');
+$socket = new React\Socket\SocketServer('0.0.0.0:8080');
 
 echo "Listening on {$socket->getAddress()}\n";
 $http->listen($socket);
