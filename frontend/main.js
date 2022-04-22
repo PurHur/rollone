@@ -77,11 +77,27 @@ const initDice = () => {
 
     // Set the value of the side, which will be upside after the dice lands
     DiceManager.prepareValues([{dice: dice, value: 1}]);
+    let rotationDirection = 'clockwise';
 
     //Animate everything
     function animate() {
-        world.step(1.0 / 60.0);
+        world.step(1 / 60);
+        const angle = dice.getObject().rotation.y;
+        if (rotationDirection === 'counterclockwise') {
+            dice.getObject().rotation.y += 0.01;
+        } else {
+            dice.getObject().rotation.y -= 0.01;
+        }
 
+        if (1.6 > angle && angle > 1.5) {
+            rotationDirection = 'clockwise';
+
+        } else if (-1.5 > angle && angle > -1.6) {
+            rotationDirection = 'counterclockwise';
+
+        }
+
+        dice.updateBodyFromMesh();
         dice.updateMeshFromBody(); // Call this after updating the physics world for rearranging the mesh according to the body
 
         renderer.render(scene, camera);
