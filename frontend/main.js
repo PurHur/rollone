@@ -109,21 +109,19 @@ const initActions = () => {
 const setDiceValue = (value) => {
     var diceValues = [];
 
-    for (var i = 0; i < dice.length; i++) {
-        let yRand = Math.random() * 20
-        dice[i].resetBody(); // As the die is going to be reused between throws, it is necessary to reset the body
-        dice[i].getObject().position.x = -15 - (i % 3) * 1.5;
-        dice[i].getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
-        dice[i].getObject().position.z = -15 + (i % 3) * 1.5;
-        dice[i].getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
-        dice[i].getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
-        dice[i].updateBodyFromMesh();
-        let rand = Math.random() * 5;
-        dice[i].getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-        dice[i].getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
+    let yRand = Math.random() * 20
+    dice.resetBody(); // As the die is going to be reused between throws, it is necessary to reset the body
+    dice.getObject().position.x = -15 - (i % 3) * 1.5;
+    dice.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
+    dice.getObject().position.z = -15 + (i % 3) * 1.5;
+    dice.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
+    dice.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
+    dice.updateBodyFromMesh();
+    let rand = Math.random() * 5;
+    dice.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
+    dice.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
-        diceValues.push({dice: dice[i], value: i + 1});
-    }
+    diceValues.push({dice: dice[i], value: i + 1});
 
     DiceManager.prepareValues(diceValues);
     // DiceManager.prepareValues([{dice: dice, value: value}]);
