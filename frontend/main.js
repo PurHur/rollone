@@ -1,15 +1,16 @@
 let scene;
 
 (function init(){
-    // Initialize the app
     document.addEventListener('DOMContentLoaded', function(){
-        initUi();
+        initTitle();
         initScene();
         initDice();
+        initEventSource();
+        initActions();
     });
 })();
 
-const initUi = () => {
+const initTitle = () => {
 
     const loader = new THREE.FontLoader();
 
@@ -107,3 +108,38 @@ const fragmentShader = `
       gl_FragColor = vec4(c, 1.0);
     }
   `;
+
+const initActions = () => {
+    const rollButton = document.getElementById('roll-button');
+    rollButton.addEventListener('click', () => {
+        getRequest('/roll').then(response => {
+            console.log(response);
+        });
+    });
+};
+
+const initEventSource = () => {
+    const eventSource = new EventSource('/');
+    eventSource.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log(data);
+    };
+};
+
+const getRequest = (url) => {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                resolve(xhr.response);
+            } else {
+                reject(new Error(xhr.statusText));
+            }
+        };
+        xhr.onerror = () => {
+            reject(new Error('Network Error'));
+        };
+        xhr.send();
+    });
+};
