@@ -14,4 +14,11 @@ class Dice {
         return rand(1, $this->sides);
     }
 
+    /**
+     * @return int
+     */
+    public function getSides(): int
+    {
+        return $this->sides;
+    }
 }

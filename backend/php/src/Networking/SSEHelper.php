@@ -112,4 +112,8 @@ class SSEHelper
     public function getPrivateStreamByPHPSESSID($phpsessid) {
         return isset($this->privateConnections[$phpsessid])?$this->privateConnections[$phpsessid]:null;
     }
+    
+    public static function generateSSEEvent($event, $data) {
+        return 'event: ' . $event . "\n" . 'data: ' . $data . "\n\n";
+    }
 }
