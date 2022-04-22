@@ -13,15 +13,13 @@ let dice;
 
 
 const initTitle = () => {
-
     const loader = new THREE.FontLoader();
 
     loader.load('./assets/Roboto_Regular.json', function (font) {
-
         const text = new THREE.TextGeometry('ROLL ONE', {
             font: font,
             size: window.matchMedia('(min-width: 768px)').matches ? 10 : 5,
-            height: 1,
+            height: window.matchMedia('(min-width: 768px)').matches ? 0.75 : 0.25,
             curveSegments: 12,
             bevelEnabled: true,
             bevelThickness: 1,
@@ -31,13 +29,14 @@ const initTitle = () => {
         });
 
         const material = new THREE.MeshPhongMaterial({color: 0x000, specular: 0x000, shininess: 50});
-
         const mesh = new THREE.Mesh(text, material);
 
         scene.add(mesh);
-        mesh.position.set(-33, 22, 0);
-    });
 
+        let xPos = window.matchMedia('(min-width: 768px)').matches ? -33 : -20;
+
+        mesh.position.set(xPos, 22, 0);
+    });
 };
 
 const initScene = () => {
