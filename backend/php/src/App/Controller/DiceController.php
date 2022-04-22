@@ -11,6 +11,7 @@ namespace Rollguys\Rollone\App\Controller;
 
 use React\Http\Message\Response;
 use Rollguys\Rollone\App\Service\DiceService;
+use Rollguys\Rollone\Networking\SSEHelper;
 
 class DiceController
 {
@@ -28,6 +29,6 @@ class DiceController
     {
         $result = $this->diceService->rollDices();
 
-        return json_encode($result);
+        return SSEHelper::generateSSEEvent("roll",json_encode($result));
     }
 }
