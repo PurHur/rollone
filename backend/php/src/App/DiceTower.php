@@ -1,5 +1,7 @@
 <?php
 
+namespace  Rollguys\Rollone\App;
+
 class DiceTower {
     public function use($dices)
     {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Rollguys\Rollone\App;
+
 class Dice {
 
     private $sides;

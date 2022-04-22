@@ -9,12 +9,22 @@
 
 namespace Rollguys\Rollone;
 
-use Rollguys\Rollone\Random;
+use Rollguys\Rollone\DiceService;
 
 class DiceController
 {
+    /**
+     * @var DiceService
+     */
+    private $diceService;
+
+    public function __construct(DiceService $diceService)
+    {
+        $this->diceService = $diceService;
+    }
+
     public function rollDiceAction()
     {
-      return Random::getSeed();
+        $dicesResult = $this->diceService->rollDices();
     }
 }

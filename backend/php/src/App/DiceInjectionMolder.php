@@ -1,7 +1,9 @@
 <?php
+namespace Rollguys\Rollone\App;
 
-class DiceSpritzgussMolder {
+use Rollguys\Rollone\App\Dice;
 
+class DiceInjectionMolder {
     public function spritzgussDices(int $diceCount, int $diceSides) {
         $dices = [];
         for ($i = 0; $i < $diceCount; $i++) {
@@ -9,5 +11,4 @@ class DiceSpritzgussMolder {
         }
         return $dices;
     }
-
 }
