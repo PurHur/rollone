@@ -75,7 +75,7 @@ const initDice = () => {
     dice.getObject().rotation.x = 45 * Math.PI / 180;
     dice.updateBodyFromMesh();
 
-    dice.on('click', _ => {
+    dice.getObject().on('click', _ => {
         rollDice();
     });
 
