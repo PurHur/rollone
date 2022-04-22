@@ -9,6 +9,7 @@
 
 namespace Rollguys\Rollone\App\Controller;
 
+use React\Http\Message\Response;
 use Rollguys\Rollone\App\Service\DiceService;
 
 class DiceController
@@ -25,6 +26,8 @@ class DiceController
 
     public function rollDiceAction()
     {
-        $dicesResult = $this->diceService->rollDices();
+        $result = $this->diceService->rollDices();
+
+        return json_encode($result);
     }
 }
