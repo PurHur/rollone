@@ -107,24 +107,7 @@ const initActions = () => {
 };
 
 const setDiceValue = (value) => {
-    var diceValues = [];
-
-    let yRand = Math.random() * 20
-    dice.resetBody(); // As the die is going to be reused between throws, it is necessary to reset the body
-    dice.getObject().position.x = -15 - (1 % 3) * 1.5;
-    dice.getObject().position.y = 2 + Math.floor(1 / 3) * 1.5;
-    dice.getObject().position.z = -15 + (1 % 3) * 1.5;
-    dice.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
-    dice.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
-    dice.updateBodyFromMesh();
-    let rand = Math.random() * 5;
-    dice.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-    dice.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
-
-    diceValues.push({dice: dice, value: value});
-
-    DiceManager.prepareValues(diceValues);
-    // DiceManager.prepareValues([{dice: dice, value: value}]);
+    DiceManager.prepareValues([{dice: dice, value: value}]);
 };
 
 const initEventSource = () => {
