@@ -1,10 +1,7 @@
 <?php
-<<<<<<< HEAD
 
 srand(\Rollguys\Rollone\App\Service\Random::getSeed() + time());
 
-=======
->>>>>>> d386bf9e0d00618792c1c9145bff670162c777fa
 // http sse formatted broadcast stream
 $broadcastStream = new \React\Stream\ThroughStream(function ($data) {
     return $data;
