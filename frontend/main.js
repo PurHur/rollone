@@ -125,6 +125,9 @@ const setDiceValue = (value) => {
 
 const initEventSource = () => {
     const eventSource = new EventSource('/');
+    eventSource.addEventListener('roll', (event) => {
+        console.log('roll', event);
+    });
     eventSource.onmessage = (event) => {
         const data = JSON.parse(event.data);
         setDiceValue(data[0]);
