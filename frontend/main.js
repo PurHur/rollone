@@ -94,10 +94,8 @@ const initDice = () => {
 
         //Animate everything
     function animate() {
-<<<<<<< HEAD
 
         world.step(1.0 / 60.0);
-=======
         world.step(1 / 60);
         const angle = dice.getObject().rotation.y;
         if (rotationDirection === 'counterclockwise') {
