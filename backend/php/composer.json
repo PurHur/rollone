@@ -1,0 +1,11 @@
+{
+    "name": "rollguys/rollone",
+    "autoload": {
+        "psr-4": {
+            "Rollguys\\Rollone\\": "src/"
+        }
+    },
+    "require": {
+        "react/http": "^1.6"
+    }
+}
