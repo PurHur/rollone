@@ -90,7 +90,7 @@ class SSEHelper
         $broadcastStream->pipe($privateStream);
 
         // send connection data to browser
-        return new \React\Http\Response(
+        return new \React\Http\Message\Response(
             200,
             array(
                 'Content-Type'      => 'text/event-stream',
