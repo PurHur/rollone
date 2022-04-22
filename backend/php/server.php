@@ -6,3 +6,5 @@ echo "Start server\n";
 
 require "src/Networking/http_server.php";
 
+
+

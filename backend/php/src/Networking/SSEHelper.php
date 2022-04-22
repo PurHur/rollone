@@ -5,9 +5,8 @@ namespace Rollguys\Rollone\Networking;
 use React\Http\Io\ServerRequest;
 use Symfony\Component\HttpFoundation\Request;
 
-class SSEHelper implements \SeminarCatalog\Interfaces\Singleton
+class SSEHelper
 {
-    use \SeminarCatalog\Traits\Singleton;
 
     /**
      * @var array<Stream>
