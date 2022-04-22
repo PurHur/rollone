@@ -4,5 +4,5 @@ require __DIR__ . '/vendor/autoload.php';
 
 echo "Start server\n";
 
-require "src/http_server.php";
+require "src/Networking/http_server.php";
 
