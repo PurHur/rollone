@@ -3,12 +3,18 @@
 namespace  Rollguys\Rollone\App\Model;
 
 class DiceTower {
+
+    /**
+     * @var array $dices
+     *
+     * @return array
+     */
     public function use($dices)
     {
-        $result = 0;
+        $result = [];
 
-        foreach ($dices as $dice) {
-            $result += $dice->throw();
+        foreach ($dices as $key => $dice) {
+            $result[$key] = $dice->throw();
         }
 
         return $result;
