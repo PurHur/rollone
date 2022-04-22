@@ -2,15 +2,21 @@
 
 namespace Rollguys\Rollone\App\Model;
 
-class Dice {
-
+class Dice
+{
+    /**
+     * @var int
+     */
     private $sides;
 
     public function __construct(int $sides) {
         $this->sides = $sides;
     }
 
-    public function throw() {
+    /**
+     * @return int
+     */
+    public function roll() {
         return rand(1, $this->sides);
     }
 
