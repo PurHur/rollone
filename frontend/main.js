@@ -1,8 +1,8 @@
 let scene;
 let dice;
 
-(function init(){
-    document.addEventListener('DOMContentLoaded', function(){
+(function init() {
+    document.addEventListener('DOMContentLoaded', function () {
         initTitle();
         initScene();
         initDice();
@@ -16,9 +16,9 @@ const initTitle = () => {
 
     const loader = new THREE.FontLoader();
 
-    loader.load( './assets/Roboto_Regular.json', function ( font ) {
+    loader.load('./assets/Roboto_Regular.json', function (font) {
 
-        const text = new THREE.TextGeometry( 'ROLL ONE', {
+        const text = new THREE.TextGeometry('ROLL ONE', {
             font: font,
             size: 10,
             height: 1,
@@ -28,15 +28,15 @@ const initTitle = () => {
             bevelSize: 1,
             bevelOffset: 0,
             bevelSegments: 5
-        } );
+        });
 
-        const material = new THREE.MeshPhongMaterial( { color: 0x000, specular: 0x000, shininess: 50 } );
+        const material = new THREE.MeshPhongMaterial({color: 0x000, specular: 0x000, shininess: 50});
 
         const mesh = new THREE.Mesh(text, material);
 
-        scene.add( mesh );
+        scene.add(mesh);
         mesh.position.set(-33, 22, 0);
-    } );
+    });
 
 };
 
@@ -45,18 +45,18 @@ const initScene = () => {
     scene.background = new THREE.Color(0xFFF6DC);
     scene.fog = new THREE.Fog(0x000, 0, 750);
 
-    const light = new THREE.AmbientLight( {color: 0x404040, intensity: 22} ); // soft white light
-    scene.add( light );
+    const light = new THREE.AmbientLight({color: 0x404040, intensity: 22}); // soft white light
+    scene.add(light);
 };
 
 const initDice = () => {
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-    const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
-    camera.position.set( 0, 0, 100 );
-    camera.lookAt( 0, 0, 0 );
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+    camera.position.set(0, 0, 100);
+    camera.lookAt(0, 0, 0);
 
     // Setup your cannonjs world
     const world = new CANNON.World();
@@ -66,18 +66,18 @@ const initDice = () => {
 
     // Create a dice
     dice = new DiceD6({size: 10}); //DiceD6 for six-sided dice; for options see DiceObject
-        scene.add(dice.getObject());
+    scene.add(dice.getObject());
 
-        // If you want to place the mesh somewhere else, you have to update the body
-        dice.getObject().position.x = 0;
-        dice.getObject().position.y = 0;
-        dice.getObject().position.z = 0;
-        dice.getObject().rotation.y = -120 * Math.PI / 180;
-        dice.getObject().rotation.x = 45 * Math.PI / 180;
-        dice.updateBodyFromMesh();
+    // If you want to place the mesh somewhere else, you have to update the body
+    dice.getObject().position.x = 0;
+    dice.getObject().position.y = 0;
+    dice.getObject().position.z = 0;
+    dice.getObject().rotation.y = -120 * Math.PI / 180;
+    dice.getObject().rotation.x = 45 * Math.PI / 180;
+    dice.updateBodyFromMesh();
 
-        // Set the value of the side, which will be upside after the dice lands
-        DiceManager.prepareValues([{dice: dice, value: 6}]);
+    // Set the value of the side, which will be upside after the dice lands
+    DiceManager.prepareValues([{dice: dice, value: 1}]);
 
     diceD4 = new DiceD4({size: 10});
         scene.add(diceD4.getObject());
@@ -92,7 +92,8 @@ const initDice = () => {
         //DiceManager.prepareValues([{dice: diceD4, value: 4}]);
 
         //Animate everything
-        function animate() {
+    function animate() {
+
         world.step(1.0 / 60.0);
 
         dice.updateMeshFromBody(); // Call this after updating the physics world for rearranging the mesh according to the body
@@ -101,15 +102,21 @@ const initDice = () => {
 
         requestAnimationFrame(animate);
     }
+
     requestAnimationFrame(animate);
 }
 
-    const initActions = () => {
+
+const rollDice = () => {
+    getRequest('/roll').then(response => {
+        console.log('/roll', response);
+    });
+};
+
+const initActions = () =>
     const rollButton = document.getElementById('roll-button');
     rollButton.addEventListener('click', () => {
-        getRequest('/roll').then(response => {
-            console.log('/roll', response);
-        });
+        rollDice();
     });
 };
 
@@ -145,8 +152,8 @@ const getRequest = (url) => {
 };
 
 
-
 'use strict';
+
 class DiceManagerClass {
     constructor() {
         this.world = null;
@@ -160,13 +167,16 @@ class DiceManagerClass {
         this.barrierBodyMaterial = new CANNON.Material();
 
         world.addContactMaterial(
-            new CANNON.ContactMaterial(this.floorBodyMaterial, this.diceBodyMaterial, { friction: 0.01, restitution: 0.5 })
+            new CANNON.ContactMaterial(this.floorBodyMaterial, this.diceBodyMaterial, {
+                friction: 0.01,
+                restitution: 0.5
+            })
         );
         world.addContactMaterial(
-            new CANNON.ContactMaterial(this.barrierBodyMaterial, this.diceBodyMaterial, { friction: 0, restitution: 1.0 })
+            new CANNON.ContactMaterial(this.barrierBodyMaterial, this.diceBodyMaterial, {friction: 0, restitution: 1.0})
         );
         world.addContactMaterial(
-            new CANNON.ContactMaterial(this.diceBodyMaterial, this.diceBodyMaterial, { friction: 0, restitution: 0.5 })
+            new CANNON.ContactMaterial(this.diceBodyMaterial, this.diceBodyMaterial, {friction: 0, restitution: 0.5})
         );
     }
 
@@ -420,7 +430,7 @@ class DiceObject {
             face.push(-1);
             chamfer_faces.push(face);
         }
-        return { vectors: chamfer_vectors, faces: chamfer_faces };
+        return {vectors: chamfer_vectors, faces: chamfer_faces};
     }
 
     makeGeometry(vertices, faces, radius, tab, af) {
@@ -451,9 +461,9 @@ class DiceObject {
                 positions.push(...vertices[ii[j + 2]].toArray());
 
                 // Flat face normals
-                cb.subVectors( vertices[ii[j + 2]], vertices[ii[j + 1]] );
-                ab.subVectors( vertices[ii[0]], vertices[ii[j + 1]] );
-                cb.cross( ab );
+                cb.subVectors(vertices[ii[j + 2]], vertices[ii[j + 1]]);
+                ab.subVectors(vertices[ii[0]], vertices[ii[j + 1]]);
+                cb.cross(ab);
                 cb.normalize();
 
                 // Vertex Normals
@@ -470,7 +480,7 @@ class DiceObject {
 
             //Set Group for face materials.
             let numOfVertices = (fl - 2) * 3;
-            for (let i = 0; i < numOfVertices/3; i++) {
+            for (let i = 0; i < numOfVertices / 3; i++) {
                 geom.addGroup(faceFirstVertexIndex, 3, materialIndex);
                 faceFirstVertexIndex += 3;
             }
@@ -478,9 +488,9 @@ class DiceObject {
         }
 
 
-        geom.setAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
-        geom.setAttribute( 'normal', new THREE.Float32BufferAttribute( normals, 3 ) );
-        geom.setAttribute( 'uv', new THREE.Float32BufferAttribute( uvs, 2 ) );
+        geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geom.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+        geom.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
         geom.boundingSphere = new THREE.Sphere(new THREE.Vector3(), radius);
         return geom;
     }
@@ -543,7 +553,7 @@ class DiceObject {
                 texture = this.createTextTexture(this.faceTexts[i], this.labelColor, this.diceColor);
             }
 
-            materials.push(new THREE.MeshPhongMaterial(Object.assign({}, this.materialOptions, { map: texture })));
+            materials.push(new THREE.MeshPhongMaterial(Object.assign({}, this.materialOptions, {map: texture})));
         }
         return materials;
     }
@@ -615,7 +625,8 @@ class DiceObject {
         this.object.body.updateMassProperties();
     }
 
-    updateMaterialsForValue(diceValue) {}
+    updateMaterialsForValue(diceValue) {
+    }
 }
 
 class DiceD4 extends DiceObject {
@@ -636,7 +647,7 @@ class DiceD4 extends DiceObject {
             [[], [0, 0, 0], [4, 2, 3], [1, 4, 3], [4, 1, 2], [1, 3, 2]]
         ];
         this.faceTexts = this.d4FaceTexts[0];
-        this.updateMaterialsForValue = function(diceValue) {
+        this.updateMaterialsForValue = function (diceValue) {
             if (diceValue < 0) diceValue += 4;
             this.faceTexts = this.d4FaceTexts[diceValue];
             this.object.material = this.getMaterials();

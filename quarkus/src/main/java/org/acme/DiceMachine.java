@@ -9,7 +9,7 @@ public class DiceMachine {
             Random random = new Random();
             rolled[i] = random.nextInt(sides);
         }
-        
+
         return rolled;
     }
 }
