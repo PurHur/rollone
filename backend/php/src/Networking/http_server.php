@@ -19,7 +19,7 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
             exit;
         }
 
-        $filePath = "../../frontend/" . $httpPath;
+        $filePath = "../../../frontend/" . $httpPath;
 
         if (!file_exists($filePath)) {
             return new React\Http\Message\Response(
@@ -32,6 +32,9 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
         if ($extension === 'html') {
             $content = file_get_contents($filePath);
             $mime = "text/html";
+        } else if ($extension === 'css') {
+            $content = file_get_contents($filePath);
+            $mime = "text/css";
         } else if ($extension === 'php') {
             $content = include $filePath;
             $mime = "text/html";

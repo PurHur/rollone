@@ -39,8 +39,8 @@ const initUi = () => {
 
 const initScene = () => {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
-    scene.fog = new THREE.Fog(0xffffff, 0, 750);
+    scene.background = new THREE.Color(0xFFF6DC);
+    scene.fog = new THREE.Fog(0x000, 0, 750);
 };
 
 const initDice = () => {
