@@ -48,6 +48,7 @@ const initScene = () => {
     scene.add(light);
 };
 
+var diceObjects;
 const initDice = () => {
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -60,51 +61,66 @@ const initDice = () => {
     // Setup your cannonjs world
     const world = new CANNON.World();
     // ...
-
     DiceManager.setWorld(world);
+    const dices = [4, 6, 8, 10, 12, 20];
+    diceObjects = {};
+    let count = 0;
 
-    // Create a dice
-    dice = new DiceD6({size: 10}); //DiceD6 for six-sided dice; for options see DiceObject
-    scene.add(dice.getObject());
+    dices.forEach(dice => {
+        let diceObj;
+        const diceManager = new DiceManagerClass();
+        diceManager.setWorld(world);
 
-    // If you want to place the mesh somewhere else, you have to update the body
-    dice.getObject().position.x = 0;
-    dice.getObject().position.y = 0;
-    dice.getObject().position.z = 0;
-    dice.getObject().rotation.y = -120 * Math.PI / 180;
-    dice.getObject().rotation.x = 45 * Math.PI / 180;
-    dice.updateBodyFromMesh();
+        eval( "diceObj = new DiceD" + dice +"({size: 10});");
+        console.log(count);
+        diceObj.diceManager = diceManager;
+        // If you want to place the mesh somewhere else, you have to update the body
+        diceObj.getObject().position.x = -30 + (count%3) * 31;
+        diceObj.getObject().position.y = - Math.floor(count/3) * 30;
+        diceObj.getObject().position.z = 0;
+        diceObj.getObject().rotation.y = -120 * Math.PI / 180;
+        diceObj.getObject().rotation.x = 45 * Math.PI / 180;
+        diceObj.updateBodyFromMesh();
+        scene.add(diceObj.getObject());
+
+        diceObjects[dice] = diceObj;
+        count++;
+    });
 
     // Set the value of the side, which will be upside after the dice lands
-    DiceManager.prepareValues([{dice: dice, value: 1}]);
+    Object.keys(diceObjects).forEach(sides => {
+        function prepare() {
+            diceObjects[sides].diceManager.prepareValues([{dice: diceObjects[sides], value: dice}]);
+        }
+    });
+
     let rotationDirection = 'clockwise';
 
-
-        //Animate everything
+    //Animate everything
     function animate() {
-
         world.step(1.0 / 60.0);
         world.step(1 / 60);
-        const angle = dice.getObject().rotation.y;
-        if (rotationDirection === 'counterclockwise') {
-            dice.getObject().rotation.y += 0.01;
-        } else {
-            dice.getObject().rotation.y -= 0.01;
-        }
+        Object.keys(diceObjects).forEach(dice => {
+            const angle = diceObjects[dice].getObject().rotation.y;
 
-        if (1.6 > angle && angle > 1.5) {
-            rotationDirection = 'clockwise';
+            if(rotationDirection === 'counterclockwise'){
+                diceObjects[dice].getObject().rotation.y += 0.01;
+            } else{
+                diceObjects[dice].getObject().rotation.y -= 0.01;
+            }
 
-        } else if (-1.5 > angle && angle > -1.6) {
-            rotationDirection = 'counterclockwise';
+            if(1.6 > angle && angle > 1.5){
+                rotationDirection = 'clockwise';
 
-        }
+            } else if(-1.5 > angle && angle > -1.6){
+                rotationDirection = 'counterclockwise';
+            }
 
-        dice.updateBodyFromMesh();
-        dice.updateMeshFromBody(); // Call this after updating the physics world for rearranging the mesh according to the body
+            diceObjects[dice].updateBodyFromMesh();
+            diceObjects[dice].updateMeshFromBody(); // Call this after updating the physics world for rearranging the mesh according to the body
+        });
 
         renderer.render(scene, camera);
-
         requestAnimationFrame(animate);
     }
 
@@ -112,28 +128,54 @@ const initDice = () => {
 }
 
 
-const rollDice = () => {
-    getRequest('/roll').then(response => {
+const rollDice = (value) => {
+    getRequest('/roll?sides='+value).then(response => {
         console.log('/roll', response);
     });
 };
 
 const initActions = () =>{
+    const d4 = document.getElementById('d4-button');
+    d4.addEventListener('click', () => {
+        rollDice(4);
+    });
+
     const d6 = document.getElementById('d6-button');
     d6.addEventListener('click', () => {
-        rollDice();
+        rollDice(6);
+    });
+
+    const d8 = document.getElementById('d8-button');
+    d8.addEventListener('click', () => {
+        rollDice(8);
+    });
+
+    const d10 = document.getElementById('d10-button');
+    d10.addEventListener('click', () => {
+        rollDice(10);
+    });
+
+    const d12 = document.getElementById('d12-button');
+    d12.addEventListener('click', () => {
+        rollDice(12);
+    });
+
+    const d20 = document.getElementById('d20-button');
+    d20.addEventListener('click', () => {
+        rollDice(20);
     });
 };
 
-const setDiceValue = (value) => {
-    DiceManager.prepareValues([{dice: dice, value: value}]);
+const setDiceValue = (value, diceObj) => {
+    diceObj.diceManager.prepareValues([{dice: diceObj, value: value}]);
 };
 
 const initEventSource = () => {
     const eventSource = new EventSource('/');
     eventSource.addEventListener('roll', (event) => {
         const data = JSON.parse(event.data);
-        setDiceValue(data.rolls[0]);
+        console.log(data);
+        setDiceValue(data.rolls[0], diceObjects[data.sides]);
         console.log('roll', event);
     });
 };
@@ -156,6 +198,7 @@ const getRequest = (url) => {
     });
 };
 
+const queueCall = cb => setTimeout(() => cb(), 0);
 
 'use strict';
 

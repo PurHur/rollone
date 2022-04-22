@@ -15,8 +15,6 @@ if(isset($_GET['action'])) {
 }
 */
 
-$request = [];
-
 /** @var mixed $controller */
 $diceService = new \Rollguys\Rollone\App\Service\DiceService();
 $controller = new \Rollguys\Rollone\App\Controller\DiceController($diceService);

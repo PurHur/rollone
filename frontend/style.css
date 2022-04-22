@@ -4,19 +4,40 @@ body {
     background: #FFF6DC;
 }
 
-#d6-button{
+.dice{
     position: absolute;
     width: 180px;
     height: 180px;
 }
 
-.dice {
-    position: absolute;
+#d4-button{
+    top: 36%;
+    left: 23%;
+}
+
+#d6-button{
     top: 36%;
     left: 43%;
-    font-size: 60px;
-    color: white;
-    font-weight: bold;
+}
+
+#d8-button{
+    top: 36%;
+    left: 63%;
+}
+
+#d10-button{
+    top: 76%;
+    left: 23%;
+}
+
+#d12-button{
+    top: 76%;
+    left: 43%;
+}
+
+#d20-button{
+    top: 76%;
+    left: 63%;
 }
 
 .action-row {

@@ -30,10 +30,11 @@ class DiceController
     /**
      * @return string
      */
-    public function rollDiceAction()
+    public function rollDiceAction($request)
     {
-        $result = $this->diceService->rollDices();
+        $sides = $request->getQueryParams()['sides'];
+        $result = $this->diceService->rollDices($sides);
 
-        return SSEHelper::generateSSEEvent("roll",'{"rolls": '.json_encode($result).'}');
+        return SSEHelper::generateSSEEvent("roll",'{"rolls": '.json_encode($result).', "sides": '.$sides.'}');
     }
 }
