@@ -1,19 +1,53 @@
+let scene;
+
 (function init(){
     // Initialize the app
     document.addEventListener('DOMContentLoaded', function(){
+        initUi();
+        initScene();
         initDice();
     });
 })();
+
+const initUi = () => {
+
+    const loader = new THREE.FontLoader();
+
+    loader.load( './assets/Roboto_Regular.json', function ( font ) {
+
+        const text = new THREE.TextGeometry( 'ROLL ONE', {
+            font: font,
+            size: 10,
+            height: 1,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 1,
+            bevelSize: 1,
+            bevelOffset: 0,
+            bevelSegments: 5
+        } );
+
+        const material = new THREE.MeshPhongMaterial( { color: 0xffff00, specular: 0xffff00, shininess: 50 } );
+
+        const mesh = new THREE.Mesh(text, material);
+
+        scene.add( mesh );
+        mesh.position.set(-33, 22, 0);
+    } );
+
+};
+
+const initScene = () => {
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xFFF6DC);
+    scene.fog = new THREE.Fog(0x000, 0, 750);
+};
 
 const initDice = () => {
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
 
-    const scene = new THREE.Scene();
-    // set scene background color
-    scene.background = new THREE.Color( 0xffffff );
-    
     const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
     camera.position.set( 0, 0, 100 );
     camera.lookAt( 0, 0, 0 );

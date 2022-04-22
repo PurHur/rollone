@@ -7,9 +7,9 @@
  * License
  */
 
-namespace Rollguys\Rollone;
+namespace Rollguys\Rollone\App\Controller;
 
-use Rollguys\Rollone\DiceService;
+use Rollguys\Rollone\App\Service\DiceService;
 
 class DiceController
 {

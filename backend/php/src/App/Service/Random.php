@@ -1,6 +1,6 @@
 <?php
 
-namespace Rollguys\Rollone;
+namespace Rollguys\Rollone\App\Service;
 
 class Random
 {

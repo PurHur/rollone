@@ -1,9 +1,9 @@
 <?php
 
-namespace Rollguys\Rollone;
+namespace Rollguys\Rollone\App\Service;
 
-use Rollguys\Rollone\App\DiceTower;
-use Rollguys\Rollone\App\DiceInjectionMolder;
+use Rollguys\Rollone\App\Model\DiceTower;
+use Rollguys\Rollone\App\Service\DiceInjectionMolder;
 
 class DiceService {
     public function rollDices() {
