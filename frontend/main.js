@@ -16,8 +16,19 @@ const initDice = () => {
     camera.lookAt( 0, 0, 0 );
 
     const geometry = new THREE.BoxGeometry( 10, 10, 10 );
-    const material = new THREE.MeshBasicMaterial( {color: 0x00ffaa, wireframe: true} );
+    const material = new THREE.MeshBasicMaterial( {
+        color: 0x00ffaa,
+        wireframe: false,
+        vertexColors: THREE.FaceColors
+    } );
     const cube = new THREE.Mesh( geometry, material );
+
+    cube.geometry.faces[0].color.setHex( 0x0000ff );
+    cube.geometry.faces[1].color.setHex( 0x0000ff );
+
+    cube.geometry.faces[2].color.setHex( 0xccffaa );
+    cube.geometry.faces[3].color.setHex( 0xccffaa );
+
     scene.add( cube );
 
     setInterval(() => {
