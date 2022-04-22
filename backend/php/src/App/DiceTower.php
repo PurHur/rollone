@@ -8,7 +8,7 @@ class DiceTower {
         $result = 0;
 
         foreach ($dices as $dice) {
-            $result += $dice->roll();
+            $result += $dice->throw();
         }
 
         return $result;

@@ -17,7 +17,8 @@ if(isset($_GET['action'])) {
 
 $request = [];
 /** @var mixed $controller */
-$controller = new \Rollguys\Rollone\DiceController();
+$diceService = new \Rollguys\Rollone\DiceService();
+$controller = new \Rollguys\Rollone\DiceController($diceService);
 $response = $controller->$actionName($request);
 
 return  file_get_contents('../../frontend/index.html');
