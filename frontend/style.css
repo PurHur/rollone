@@ -54,7 +54,7 @@ body {
     left: 1rem;
 }
 
-button {
+input {
    align-items: center;
    appearance: none;
    background-color: #fff;
@@ -89,15 +89,25 @@ button {
     margin-right: 1rem;
 }
 
-button:hover {
+input:hover {
     background: #F6F9FE;
     color: #174ea6;
 }
 
-button:not(:disabled) {
+input:not(:disabled) {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
 
-button:not(:disabled):hover {
+input:not(:disabled):hover {
     box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
 }
+
+#journal {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+
+    padding:10px;
+    background: rgba(255, 255, 255, .5);
+}
+

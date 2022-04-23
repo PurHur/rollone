@@ -23,7 +23,10 @@ $http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterf
         }
 
         if ($httpPath === '/roll') {
-            $httpPath = '/index.php';
+            $httpPath = '/index.php'; // todo umbennenen
+        }
+        if ($httpPath === '/journal') {
+            $httpPath = '/journal.php';
         }
 
         // restart for autodeployment

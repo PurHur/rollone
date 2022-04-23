@@ -8,6 +8,7 @@ let dice;
         initDice();
         initEventSource();
         initActions();
+        fetchJournal();
     });
 })();
 
@@ -130,6 +131,23 @@ const initDice = () => {
 }
 
 
+const fetchJournal = (value) => {
+    getRequest('/journal').then(response => {
+        const entries = JSON.parse(response);
+        if (entries) {
+            document.getElementById("journal").innerHTML = "";
+
+            entries.forEach(entry => {
+                try {
+                    var data = JSON.parse(entry.data);
+                    document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.roller+' würfelt mit einem d'+data.sides+' '+data.rolls.join(",")+'</div>';
+                } catch (e) {}
+            });
+        }
+    });
+};
+
+
 const rollDice = (value) => {
     getRequest('/roll?sides='+value).then(response => {
         console.log('/roll', value,response);
@@ -172,6 +190,10 @@ const setDiceValue = (value, diceObj) => {
     diceObj.diceManager.prepareValues([{dice: diceObj, value: value}]);
 };
 
+function setUsernameCoookie(name) {
+    document.cookie = 'username=' + name + '; expires=0; path=/';
+}
+
 const initEventSource = () => {
     const eventSource = new EventSource('/');
     eventSource.addEventListener('roll', (event) => {
@@ -180,6 +202,12 @@ const initEventSource = () => {
         setDiceValue(data.rolls[0], diceObjects[data.sides]);
         console.log('roll', event);
 
+        document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.roller+' würfelt mit einem d'+data.sides+' '+data.rolls.join(",")+'</div>';
+    });
+    eventSource.addEventListener('name', (event) => {
+        const name = event.data;
+        setUsernameCoookie(name);
+        document.getElementById("username").value = name;
     });
 };
 
