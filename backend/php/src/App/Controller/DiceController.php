@@ -42,6 +42,6 @@ class DiceController
         $messageJournal = new \Rollguys\Rollone\App\Model\MessageJournal();
         $result = $messageJournal->getJournal();
 
-        return SSEHelper::generateSSEEvent("journal",json_encode($result));
+        return json_encode($result);
     }
 }
