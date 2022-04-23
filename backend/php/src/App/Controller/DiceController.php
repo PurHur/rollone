@@ -34,7 +34,7 @@ class DiceController
     {
         $sides = $request->getQueryParams()['sides'];
         $result = $this->diceService->rollDices($sides);
-        $username = getHeaders()['Cookie'];
+        $username = $request->getHeaders()['Cookie'];
 
         return SSEHelper::generateSSEEvent("roll",'{"rolls": '.json_encode($result).', "sides": '.$sides.', "roller": "'.$username.'"}');
     }
