@@ -140,7 +140,7 @@ const fetchJournal = (value) => {
             entries.forEach(entry => {
                 try {
                     var data = JSON.parse(entry.data);
-                    document.getElementById("journal").innerHTML += '<div class="journal-entry">' + data.sides + ' ' + data.rolls.join(",") + '</div>';
+                    document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.roller+' würfelt mit einem d'+data.sides+' '+data.rolls.join(",")+'</div>';
                 } catch (e) {}
             });
         }
