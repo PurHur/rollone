@@ -195,6 +195,9 @@ const initEventSource = () => {
         console.log(data);
         setDiceValue(data.rolls[0], diceObjects[data.sides]);
         console.log('roll', event);
+
+        document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.sides+' '+data.rolls.join(",")+'</div>';
+
     });
 };
 
