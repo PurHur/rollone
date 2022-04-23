@@ -141,6 +141,8 @@ const fetchJournal = (value) => {
                 try {
                     var data = JSON.parse(entry.data);
                     document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.roller+' würfelt mit einem d'+data.sides+' '+data.rolls.join(",")+'</div>';
+                    fadeOut(".journal-entry:not(.active)",1000)
+
                 } catch (e) {}
             });
         }
