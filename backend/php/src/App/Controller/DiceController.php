@@ -37,4 +37,11 @@ class DiceController
 
         return SSEHelper::generateSSEEvent("roll",'{"rolls": '.json_encode($result).', "sides": '.$sides.'}');
     }
+
+    public function journalAction($request) {
+        $messageJournal = new \Rollguys\Rollone\App\Model\MessageJournal();
+        $result = $messageJournal->getJournal();
+
+        return SSEHelper::generateSSEEvent("journal",json_encode($result));
+    }
 }

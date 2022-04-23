@@ -19,6 +19,10 @@ class MessageJournal
         self::$counter++;
     }
 
+    public function getJournal() {
+        return self::$journal;
+    }
+
     public function getLastMessageId() {
         return self::$counter;
     }
