@@ -1,3 +1,3 @@
 <?php
 
-return \Rollguys\Rollone\Random::getSeed();
+return \Rollguys\Rollone\App\Service\Random::getSeed();

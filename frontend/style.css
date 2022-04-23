@@ -4,13 +4,48 @@ body {
     background: #FFF6DC;
 }
 
-.dice {
+.dice{
     position: absolute;
-    top: 47%;
-    left: 48.5%;
-    font-size: 60px;
-    color: white;
-    font-weight: bold;
+    width: 180px;
+    height: 180px;
+}
+
+#d4-button{
+    top: 36%;
+    left: 23%;
+}
+
+#d6-button{
+    top: 36%;
+    left: 43%;
+}
+
+#d8-button{
+    top: 36%;
+    left: 63%;
+}
+
+#d10-button{
+    top: 76%;
+    left: 23%;
+}
+
+#d12-button{
+    top: 76%;
+    left: 43%;
+}
+
+#d20-button{
+    top: 76%;
+    left: 63%;
+}
+
+@media only screen and (max-width: 768px) {
+    .dice{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+    }
 }
 
 .action-row {
