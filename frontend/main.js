@@ -134,15 +134,14 @@ const initDice = () => {
 const fetchJournal = (value) => {
     getRequest('/journal').then(response => {
         const entries = JSON.parse(response);
+        if (entries) {
+            document.getElementById("journal").innerHTML = "";
 
-        document.getElementById("journal").innerHTML = "";
-
-        entries.forEach(entry => {
-            if (entry) {
+            entries.forEach(entry => {
                 var data = JSON.parse(entry.data);
-                document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.sides+' '+data.rolls.join(",")+'</div>';
-            }
-        });
+                document.getElementById("journal").innerHTML += '<div class="journal-entry">' + data.sides + ' ' + data.rolls.join(",") + '</div>';
+            });
+        }
     });
 };
 
