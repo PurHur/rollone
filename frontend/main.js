@@ -199,7 +199,10 @@ const initEventSource = () => {
         console.log('roll', event);
 
         document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.sides+' '+data.rolls.join(",")+'</div>';
-
+    });
+    eventSource.addEventListener('name', (event) => {
+        const name = event.data;
+        document.cookie = 'username='+name+'; expires=0; path=/';
     });
 };
 
