@@ -221,6 +221,8 @@ function fadeOut(selector, timeInterval, callback = null) {
 
     fadeTarget.classList.add('active');
 
+    timeInterval = 5000;
+
     let time = timeInterval / 1000;
     fadeTarget.style.transition = time + 's';
     fadeTarget.style.opacity = 0;
