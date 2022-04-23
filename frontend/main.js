@@ -225,7 +225,7 @@ function fadeOut(selector, timeInterval, callback = null) {
 
     let time = timeInterval / 1000;
     fadeTarget.style.transition = time + 's';
-    fadeTarget.style.opacity = 0;
+    fadeTarget.style.opacity = 1;
     var fadeEffect = setInterval(function() {
 
         if (fadeTarget.style.opacity <= 0)
@@ -234,6 +234,8 @@ function fadeOut(selector, timeInterval, callback = null) {
             if (typeof (callback) === 'function') {
                 callback();
             }
+        } else {
+            fadeTarget.style.opacity -= 0.01;
         }
     }, timeInterval);
 }
