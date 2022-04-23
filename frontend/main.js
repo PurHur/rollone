@@ -133,15 +133,15 @@ const initDice = () => {
 
 const fetchJournal = (value) => {
     getRequest('/journal').then(response => {
-    const entries = JSON.parse(response);
+        const entries = JSON.parse(response);
 
         document.getElementById("journal").innerHTML = "";
 
         entries.forEach(entry => {
-        if (entry.event == "roll") {
-            document.getElementById("journal").innerHTML += '<div class="journal-entry">'+entry.sides+' '+entry.rolls.join(",")+'</div>';
-        }
-    }
+            if (entry.event == "roll") {
+                document.getElementById("journal").innerHTML += '<div class="journal-entry">'+entry.sides+' '+entry.rolls.join(",")+'</div>';
+            }
+        });
     });
 };
 
