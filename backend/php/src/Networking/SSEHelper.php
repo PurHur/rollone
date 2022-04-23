@@ -4,6 +4,7 @@ namespace Rollguys\Rollone\Networking;
 
 use React\Http\Io\ServerRequest;
 use Symfony\Component\HttpFoundation\Request;
+use React\EventLoop\Loop;
 
 class SSEHelper
 {
@@ -63,6 +64,13 @@ class SSEHelper
         $this->privateConnections[$sessId] = $privateStream;
 
         $broadcastStream->pipe($privateStream);
+
+        $name = \Rollguys\Rollone\App\Model\NameGenerator::generate();
+
+        $loop = Loop::get();
+        $loop->futureTick(function () use ($privateStream, $name) {
+            $privateStream->write(SSEHelper::generateSSEEvent("name",$name));
+        });
 
         // send connection data to browser
         return new \React\Http\Message\Response(
