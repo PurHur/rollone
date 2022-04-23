@@ -34,7 +34,7 @@ class DiceController
     {
         $sides = $request->getQueryParams()['sides'];
         $result = $this->diceService->rollDices($sides);
-        $username = implode(",", $this->getallheaders());
+        $username = getHeaders()['Cookie'];
 
         return SSEHelper::generateSSEEvent("roll",'{"rolls": '.json_encode($result).', "sides": '.$sides.', "roller": "'.$username.'"}');
     }
@@ -46,13 +46,4 @@ class DiceController
         return json_encode($result);
     }
 
-    private function getallheaders() {
-                $headers = [];
-                foreach ($_SERVER as $name => $value) {
-                    if (substr($name, 0, 5) == 'HTTP_') {
-                        $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-                    }
-                }
-                return $headers;
-                }
 }
