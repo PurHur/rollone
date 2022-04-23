@@ -132,7 +132,7 @@ const initDice = () => {
 
 const rollDice = (value) => {
     getRequest('/roll?sides='+value).then(response => {
-        console.log('/roll', response);
+        console.log('/roll', value,response);
     });
 };
 
@@ -179,6 +179,7 @@ const initEventSource = () => {
         console.log(data);
         setDiceValue(data.rolls[0], diceObjects[data.sides]);
         console.log('roll', event);
+
     });
 };
 
