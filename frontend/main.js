@@ -204,7 +204,7 @@ const initEventSource = () => {
 
         document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.roller+' würfelt mit einem d'+data.sides+' '+data.rolls.join(",")+'</div>';
 
-        fadeOut(".journal-entry",1000)
+        fadeOut(".journal-entry:not(.active)",1000)
     });
     eventSource.addEventListener('name', (event) => {
         const name = event.data;
@@ -216,6 +216,8 @@ const initEventSource = () => {
 function fadeOut(selector, timeInterval, callback = null) {
 
     var fadeTarget = document.querySelector(selector);
+
+    fadeTarget.classList.add('active');
 
     let time = timeInterval / 1000;
     fadeTarget.style.transition = time + 's';
