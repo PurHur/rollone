@@ -190,6 +190,10 @@ const setDiceValue = (value, diceObj) => {
     diceObj.diceManager.prepareValues([{dice: diceObj, value: value}]);
 };
 
+function setUsernameCoookie(name) {
+    document.cookie = 'username=' + name + '; expires=0; path=/';
+}
+
 const initEventSource = () => {
     const eventSource = new EventSource('/');
     eventSource.addEventListener('roll', (event) => {
@@ -202,7 +206,8 @@ const initEventSource = () => {
     });
     eventSource.addEventListener('name', (event) => {
         const name = event.data;
-        document.cookie = 'username='+name+'; expires=0; path=/';
+        setUsernameCoookie(name);
+        document.getElementById("username").innerHTML = name;
     });
 };
 
