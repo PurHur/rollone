@@ -138,9 +138,11 @@ const fetchJournal = (value) => {
         document.getElementById("journal").innerHTML = "";
 
         entries.forEach(entry => {
-            console.log(entry);
-            if (entry.event == "roll") {
-                document.getElementById("journal").innerHTML += '<div class="journal-entry">'+entry.sides+' '+entry.rolls.join(",")+'</div>';
+            if (entry) {
+                var data = JSON.parse(entry.data);
+                if (data.event == "roll") {
+                    document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.sides+' '+data.rolls.join(",")+'</div>';
+                }
             }
         });
     });
