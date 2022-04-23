@@ -207,7 +207,7 @@ const initEventSource = () => {
     eventSource.addEventListener('name', (event) => {
         const name = event.data;
         setUsernameCoookie(name);
-        document.getElementById("username").innerHTML = name;
+        document.getElementById("username").value = name;
     });
 };
 
