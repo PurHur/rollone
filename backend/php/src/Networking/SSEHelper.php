@@ -95,6 +95,13 @@ class SSEHelper
      * @return string
      */
     public static function generateSSEEvent($event, $data) {
-        return 'event: ' . $event . "\n" . 'data: ' . $data . "\n\n";
+        $messageJournal = new \Rollguys\Rollone\App\Model\MessageJournal();
+
+        $id = $messageJournal->getLastMessageId() +1 ;
+        $event = 'id: '.$id."\n".'event: ' . $event . "\n" . 'data: ' . $data . "\n\n";
+
+        $messageJournal->writeDown($id,$event,$data);
+
+        return $event;
     }
 }
