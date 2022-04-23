@@ -10,32 +10,32 @@ body {
     height: 180px;
 }
 
-#d4-input{
+#d4-button{
     top: 36%;
     left: 23%;
 }
 
-#d6-input{
+#d6-button{
     top: 36%;
     left: 43%;
 }
 
-#d8-input{
+#d8-button{
     top: 36%;
     left: 63%;
 }
 
-#d10-input{
+#d10-button{
     top: 76%;
     left: 23%;
 }
 
-#d12-input{
+#d12-button{
     top: 76%;
     left: 43%;
 }
 
-#d20-input{
+#d20-button{
     top: 76%;
     left: 63%;
 }
