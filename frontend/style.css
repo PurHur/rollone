@@ -111,3 +111,6 @@ input:not(:disabled):hover {
     background: rgba(255, 255, 255, .5);
 }
 
+#journal .journal-entry {
+    opacity:1;
+}
