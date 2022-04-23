@@ -141,8 +141,7 @@ const fetchJournal = (value) => {
                 try {
                     var data = JSON.parse(entry.data);
                     document.getElementById("journal").innerHTML += '<div class="journal-entry">' + data.sides + ' ' + data.rolls.join(",") + '</div>';
-                } catch (e) {
-                }
+                } catch (e) {}
             });
         }
     });
