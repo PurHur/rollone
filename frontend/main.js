@@ -198,7 +198,7 @@ const initEventSource = () => {
         setDiceValue(data.rolls[0], diceObjects[data.sides]);
         console.log('roll', event);
 
-        document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.sides+' '+data.rolls.join(",")+'</div>';
+        document.getElementById("journal").innerHTML += '<div class="journal-entry">'+data.roller+' würfelt mit einem d'+data.sides+' '+data.rolls.join(",")+'</div>';
     });
     eventSource.addEventListener('name', (event) => {
         const name = event.data;
