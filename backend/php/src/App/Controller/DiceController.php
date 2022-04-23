@@ -33,10 +33,15 @@ class DiceController
     public function rollDiceAction($request)
     {
         $sides = $request->getQueryParams()['sides'];
-        $result = $this->diceService->rollDices($sides);
-        $username = explode('=', implode(',', $request->getHeaders()['Cookie']))[1];
+        $dicesResult = $this->diceService->rollDices($sides);
+        $username = $request->getCookieParams()['username'];
+        $result = [
+            "rolls" => $dicesResult,
+            "sides" => $sides,
+            "roller" => $username
+        ];
 
-        return SSEHelper::generateSSEEvent("roll",'{"rolls": '.json_encode($result).', "sides": '.$sides.', "roller": "'.$username.'"}');
+        return SSEHelper::generateSSEEvent("roll",json_encode($result));
     }
 
     public function journalAction($request) {
