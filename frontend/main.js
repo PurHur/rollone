@@ -139,7 +139,7 @@ const fetchJournal = (value) => {
 
         entries.forEach(entry => {
         if (entry.event == "roll") {
-            document.getElementById("journal").innerHTML += '<div class="journal-entry">'.entry.sides.' '.entry.rolls.join(",").'</div>';
+            document.getElementById("journal").innerHTML += '<div class="journal-entry">'+entry.sides+' '+entry.rolls.join(",")+'</div>';
         }
     }
     });
