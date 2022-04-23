@@ -138,8 +138,11 @@ const fetchJournal = (value) => {
             document.getElementById("journal").innerHTML = "";
 
             entries.forEach(entry => {
-                var data = JSON.parse(entry.data);
-                document.getElementById("journal").innerHTML += '<div class="journal-entry">' + data.sides + ' ' + data.rolls.join(",") + '</div>';
+                try {
+                    var data = JSON.parse(entry.data);
+                    document.getElementById("journal").innerHTML += '<div class="journal-entry">' + data.sides + ' ' + data.rolls.join(",") + '</div>';
+                } catch (e) {
+                }
             });
         }
     });
