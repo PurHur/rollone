@@ -3,7 +3,6 @@
 namespace Rollguys\Rollone\Networking;
 
 use React\Http\Io\ServerRequest;
-use Symfony\Component\HttpFoundation\Request;
 use React\EventLoop\Loop;
 
 class SSEHelper
