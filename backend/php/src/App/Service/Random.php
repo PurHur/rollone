@@ -18,6 +18,7 @@ class Random
      */
     public static function getSeed() : int
     {
-        return (int)hexdec(md5(file_get_contents("https://sdo.gsfc.nasa.gov/assets/img/latest/latest_4096_0171.jpg")));
+
+        return intval(bcmod(base_convert(md5(file_get_contents("https://sdo.gsfc.nasa.gov/assets/img/latest/latest_4096_0171.jpg")),16,10), PHP_INT_MAX ));
     }
 }
